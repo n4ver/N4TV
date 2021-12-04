@@ -1,4 +1,5 @@
 from Dependencies.base_functions import valid_log, extract_log_no, special_sort
+from app import data_handler
 import prettytable
 import requests
 import json
@@ -40,46 +41,17 @@ def main():
     bigdict = response.json()
     aliases = bigdict["names"]
     data = bigdict["players"]
-
+    results = data_handler(real_aliases, bigdict)
 
     table1, table2 = init_table()
 
-    classorder = ['scout','soldier','pyro','demoman','heavyweapons','engineer','medic','sniper','spy']
-    order = {key:i for i, key in enumerate(classorder)}
-    red_team = []
-    blu_team = []
-    for i in aliases:
-        if i not in real_aliases:
-            real_aliases[i] = aliases[i]
-        classinfo = data[i]["class_stats"][0]["type"]
-        if data[i]["team"] == "Blue":
-            blu_team += [[i, order[classinfo]]]
-        elif data[i]["team"] == "Red":
-            red_team += [[i, order[classinfo]]]
-    #print(order)
-    #print(red_team)
-    red_team = special_sort(red_team, order)
-    blu_team = special_sort(blu_team, order)
-    total_red = [0, 0, 0, 0]
-    total_blu = [0, 0, 0, 0]
-    for j in red_team:
-        i = j[0]
-        lst = [data[i]["class_stats"][0]["type"], real_aliases[i], data[i]["kills"], data[i]["deaths"], data[i]["dmg"], data[i]["hr"]]
-        #print(row_format.format(aliases[i], data[i]["kills"], data[i]["deaths"], data[i]["dmg"], data[i]["hr"]))
-        table1.add_row(lst)
-        for k in range(2, len(lst)):
-            total_red[k-2] += lst[k]
-    table1.add_row(["", "Total"] + total_red)
+    for i in results[0]:
+        table1.add_row(i)
+    for i in results[1]:
+        table2.add_row(i)
 
-    for j in blu_team:
-        i = j[0]
-        lst = [data[i]["kills"], data[i]["deaths"], data[i]["dmg"], data[i]["hr"], real_aliases[i], data[i]["class_stats"][0]["type"]]
-        #print(row_format.format(aliases[i], data[i]["kills"], data[i]["deaths"], data[i]["dmg"], data[i]["hr"]))
-        table2.add_row(lst)
-        for k in range(len(lst)-2):
-            total_blu[k] += lst[k]
-    table2.add_row(total_blu + ["Total", ""])
-    
+    table1.add_row(["", "Total"] + results[3])
+    table2.add_row(results[2] + ["Total", ""])
     print(table1)
     print(table2)
 
