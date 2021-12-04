@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script src="../static/js/validate_form.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bg.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+	<div class="content">
+		<form name="logGetter" action="{{ url_for('log') }}" onsubmit="return validateForm()" method="POST">
+			<label for="logsurl">Log URL:</label>
+			<input type="text" id="logsurl" name="logsurl">
+			<input type="submit" id="submit" name="submit">
+		</form>
+	</div>
+</div>
+{% endblock %}

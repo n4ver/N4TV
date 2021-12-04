@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-sacle=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>N4TV Dashboard</title>
+  <link rel="shortcut icon" href="../static/img/game.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  {% block head %}{% endblock %}
+
+</head>
+
+<body>
+	<header class="header">
+		<div class="header-banner">
+			<h1>N4TV Dashboard</h1>
+		</div>
+		<div class="header-nav-container">
+			<nav class="header-nav">
+				<a href="/" class="header-nav-item-wrapper">
+					<div class="header-nav-item mod-solo ">
+					Home
+					</div>
+				</a>
+			</nav>
+		</div>
+	</header>
+	<br>
+	<div class="foreground">
+		{% block body %}{% endblock %}
+	</div>
+
+	<footer>
+		<a href="https://steamcommunity.com/id/n4ver/">n4ver</a>
+	</footer>
+</body>
+
+</html>

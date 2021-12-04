@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<br>
+<div class="logtable">
+	<h1>Logs</h1>
+	<br>
+
+	<br>
+	<table class="blu">
+		<caption contenteditable="true" spellcheck="false">BLU</caption>
+		<tr>
+			<th>Class</th>
+			<th>Name</th>
+			<th>K</th>
+			<th>D</th>
+			<th>DMG</th>
+			<th>HR</th>
+		</tr>
+		{% for player in data[0] %}
+		<tr>
+			{% for stat in player %}
+			<td>{{ stat }}</td>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+	</table>
+	
+	<table class="red">
+		<caption contenteditable="true" spellcheck="false">RED</caption>
+		<tr>
+			<th>K</th>
+			<th>D</th>
+			<th>DMG</th>
+			<th>HR</th>
+			<th>Name</th>
+			<th>Class</th>
+		</tr>
+		{% for player in data[1] %}
+		<tr>
+			{% for stat in player %}
+			<td>{{ stat }}</td>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+	</table>
+	<br>
+	<h2>Total</h2>
+	<table class="totalblu">
+		<tr>
+			<th>K</th>
+			<th>D</th>
+			<th>DMG</th>
+			<th>HR</th>
+		</tr>
+		<tr>
+		{% for stat in data[3] %}
+		<td>{{ stat }}</td>
+		{% endfor %}
+		</tr>
+	</table>
+	<table class="totalred">
+		<tr>
+			<th>K</th>
+			<th>D</th>
+			<th>DMG</th>
+			<th>HR</th>
+		</tr>
+		<tr>
+		{% for stat in data[2] %}
+		<td>{{ stat }}</td>
+		{% endfor %}
+		</tr>
+	</table>
+</div>
+{% endblock %}
