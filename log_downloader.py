@@ -13,7 +13,7 @@ def main():
     api = "https://logs.tf/api/v1/log/" + str(log_no)
     response = requests.get(api)
     print("STATUS: ", response.status_code)
-    with open(f'/../logs/{str(log_no)}.json', 'w', encoding='utf-8') as f:
+    with open(f'logs/{str(log_no)}.json', 'w', encoding='utf-8') as f:
         json.dump(response.json(), f, ensure_ascii=False, indent=4)
 
 if __name__ == "__main__":
