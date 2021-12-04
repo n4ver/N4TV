@@ -2,6 +2,7 @@
 A dashboard that implements a stream layout for showcasing TF2 logs on stream
 
 # Installation
+Install Python 3.5+ on your system to use.
 Download source code .zip and install with 
 ```
 $ pip install -r requirements.txt
