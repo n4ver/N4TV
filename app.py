@@ -97,9 +97,12 @@ def data_handler(real_aliases, resp):
 
 
 def load_json():
-    f = open('real_aliases.json')
-    data = json.load(f)
-    return data
+    try:
+        f = open('real_aliases.json')
+        data = json.load(f)
+        return data
+    except FileNotFoundError:
+        return {}
 
 
 if __name__ == "__main__":
