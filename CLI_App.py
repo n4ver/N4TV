@@ -1,4 +1,4 @@
-from Dependencies.base_functions import valid_log, extract_log_no, special_sort
+from Dependencies.base_functions import valid_log, extract_log_no
 from app import data_handler
 import prettytable
 import requests

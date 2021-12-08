@@ -20,5 +20,5 @@ def valid_log(url):
     return (valid_url(url) and extract_log_no(url) != -1)
 
 
-def special_sort(lst, order):
+def special_sort(lst):
     return sorted(lst, key = lambda x: x [1])

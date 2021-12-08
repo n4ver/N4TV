@@ -67,8 +67,8 @@ def data_handler(real_aliases, resp):
         elif data1[i]["team"] == "Red":
             red_team += [[i, order[classinfo]]]
 
-    red_team = special_sort(red_team, order)
-    blu_team = special_sort(blu_team, order)
+    red_team = special_sort(red_team)
+    blu_team = special_sort(blu_team)
     total_red = [0, 0, 0, 0]
     total_blu = [0, 0, 0, 0]
     #row_format = " {:^6} {:^6} {:^6} {:^6} {:^6} {:^6} "
