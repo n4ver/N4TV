@@ -28,7 +28,6 @@ def log():
         bigdict = response.json()
         data = data_handler(real_aliases, bigdict)
         
-        return render_template('handle_logs.html', data=data)
     elif request.method == "GET":
         log_url = request.args.get('log', None)
         log_no = extract_log_no(log_url)
@@ -45,8 +44,9 @@ def log():
         bigdict = response.json()
         data = data_handler(real_aliases, bigdict)
 
-        #return render_template('index.html')
-        return render_template('handle_logs.html', data=data)
+    sharelink = f"{request.base_url}?log={log_url}"
+    #return render_template('index.html')
+    return render_template('handle_logs.html', data=data, sharelink=sharelink)
 
 
 def data_handler(real_aliases, resp):

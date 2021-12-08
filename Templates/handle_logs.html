@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
+<script src="../static/js/copy_function.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -75,5 +76,15 @@
 		{% endfor %}
 		</tr>
 	</table>
+</div>
+
+<div class="shareablelink">
+	<input type="text" value="{{ sharelink }}" id="sharelink">
+	<div class="tooltip">
+		<button id="copylink" type="button" title="Copy Shareable Link" onclick="copy_function()" onmouseout="out_function()">
+			<span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+			Copy Shareable Link
+		</button>
+	</div>
 </div>
 {% endblock %}
