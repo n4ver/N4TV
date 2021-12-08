@@ -13,5 +13,4 @@ Index page will show form for inputting log URL. Use windows capture for resulta
 
 ## TODO
 1. add database for league matches/logs analyzed for casting
-2. add shareable links to bottom of page on log page
 3. New part of dashboard: HLTV-esque rating system, using match database.
