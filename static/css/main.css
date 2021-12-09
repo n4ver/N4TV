@@ -75,6 +75,11 @@ td {
 	background-color: #34363d;
 }
 
+.header-nav-item {
+	display: inline;
+	padding: 0 12px;
+}
+
 .logtable {
 	/** background-color: #04F404; **/
 	/** #232529 **/

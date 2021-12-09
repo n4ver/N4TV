@@ -2,3 +2,5 @@
 /.venv/
 /logs/
 real_aliases.json
+/Seperate/
+KEY.txt
