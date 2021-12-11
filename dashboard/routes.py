@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, current_user, login_user
+from flask import render_template, request, redirect, url_for
+from flask import current_app as app
+from flask_login import current_user, login_user
 
-from Dependencies.base_functions import extract_log_no, special_sort
-from config import HOST, PORT
-from forms import SignupForm, LoginForm
-from models import User, app, db, login_manager
+from .common import extract_log_no, special_sort
+from .forms import SignupForm, LoginForm
+from .models import User
+from . import db, login_manager
 
 import requests
 import json
@@ -18,12 +18,15 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))  
+    
     form = SignupForm()
     if form.validate_on_submit():
         existing_user = User.query.filter_by(email=form.email.data).first()
         if existing_user is None:
             user = User(
-                name=form.name.data,
+                username=form.name.data,
                 email=form.email.data
             )
             user.set_password(form.password.data)
@@ -145,7 +148,3 @@ def load_user(user_id):
     if user_id is not None:
         return User.query.get(user_id)
     return None
-
-
-if __name__ == "__main__":
-    app.run(debug=True, port=PORT, host=HOST)
