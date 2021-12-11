@@ -105,6 +105,12 @@ td {
 	margin-top: 15vh;
 }
 
+#sharelink {
+	padding: 4px 8px;
+	border-radius: 10px;
+    border: 1px solid;
+}
+
 .tooltip {
 	position: relative;
 	display: inline-block;
@@ -142,28 +148,3 @@ td {
 	visibility: visible;
 	opacity: 1;
   }
-
-  .form-wrapper, button, #sharelink {
-	  padding: 8px 16px;
-	  border-radius: 10px;
-	  border: 1px solid;
-  }
-
-  .form-wrapper {
-	  background-color: white;
-	  color: black;
-	  width: 30%;
-	  margin: auto;
-  }
-
-  fieldset {
-	  border: 0;
-  }
-
-  input[type=text], input[type=password] {
-	  margin: auto;
-	  color: black;
-	  border-radius: 5px;
-	  width: 100%;
-  }
-
