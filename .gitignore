@@ -4,6 +4,6 @@
 real_aliases.json
 /Seperate/
 KEY.txt
-.db
+*.db
 STEAM_API.txt
 test.py
