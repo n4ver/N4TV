@@ -67,7 +67,7 @@ def log():
         data = data_handler(real_aliases, bigdict)
         
     elif request.method == "GET":
-        log_url = request.args.get('log', None)
+        log_url = request.args.get('l', None)
         log_no = extract_log_no(log_url)
 
         api = "https://logs.tf/api/v1/log/" + str(log_no)
@@ -82,7 +82,7 @@ def log():
         bigdict = response.json()
         data = data_handler(real_aliases, bigdict)
 
-    sharelink = f"{request.base_url}?log={log_url}"
+    sharelink = f"{request.base_url}?l={log_url}"
     return render_template('handle_logs.html', data=data, sharelink=sharelink)
 
 
