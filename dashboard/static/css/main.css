@@ -75,6 +75,11 @@ td {
 	background-color: #34363d;
 }
 
+.header-nav-item {
+	display: inline;
+	padding: 0 12px;
+}
+
 .logtable {
 	/** background-color: #04F404; **/
 	/** #232529 **/
@@ -84,6 +89,7 @@ td {
 
 .content {
 	padding: 17px;
+	margin: 12px 0;
 }
 
 .wrapper {
@@ -97,6 +103,12 @@ td {
 
 .shareablelink {
 	margin-top: 15vh;
+}
+
+#sharelink {
+	padding: 4px 8px;
+	border-radius: 10px;
+    border: 1px solid;
 }
 
 .tooltip {
@@ -135,10 +147,4 @@ td {
   .tooltip:hover .tooltiptext {
 	visibility: visible;
 	opacity: 1;
-  }
-
-  button, #sharelink {
-	  padding: 8px 16px;
-	  border-radius: 10px;
-	  border: 1px solid;
   }
