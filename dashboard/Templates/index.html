@@ -3,11 +3,12 @@
 {% block head %}
 <script src="../static/js/validate_form.js"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/bg.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
 {% endblock %}
 
 {% block body %}
 <div class="wrapper">
-	<div class="content">
+	<div class="content_index">
 		<form name="logGetter" action="{{ url_for('log') }}" onsubmit="return validateForm()" method="POST">
 			<label for="logsurl">Log URL:</label>
 			<input type="text" id="logsurl" name="logsurl">

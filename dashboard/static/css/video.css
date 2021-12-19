@@ -1,0 +1,15 @@
+#videobg {
+    position: fixed;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+  
+  /* Add some content at the bottom of the video/page */
+  .content {
+    position: fixed;
+    color: #f1f1f1;
+    width: 100%;
+    margin-top: 8vh;
+  }
+  

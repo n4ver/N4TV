@@ -75,6 +75,10 @@ td {
 	background-color: #34363d;
 }
 
+.header-nav-item-wrapper {
+	text-decoration: none;
+}
+
 .header-nav-item {
 	display: inline;
 	padding: 0 12px;
@@ -83,11 +87,11 @@ td {
 .logtable {
 	/** background-color: #04F404; **/
 	/** #232529 **/
-	background-color: inherit;
 	opacity: 1;
+	background: rgba(0, 0, 0, 0.5);
 }
 
-.content {
+.content_index {
 	padding: 17px;
 	margin: 12px 0;
 }
@@ -102,7 +106,7 @@ td {
 }
 
 .shareablelink {
-	margin-top: 15vh;
+	margin-top: 30vh;
 }
 
 #sharelink {
