@@ -2,89 +2,101 @@
 
 {% block head %}
 <script src="../static/js/copy_function.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/video.css') }}">
 {% endblock %}
 
 {% block body %}
+<video autoplay muted loop id="videobg">
+	<source src="../static/video/{{ map_played.split('_')[1].lower()}}.mp4" type="video/mp4">
+  </video>
+
+
 <br>
-<div class="logtable">
-	<h1>Logs</h1>
-	<br>
-
-	<br>
-	<table class="blu">
-		<caption contenteditable="true" spellcheck="false">BLU</caption>
-		<tr>
-			<th>Class</th>
-			<th>Name</th>
-			<th>K</th>
-			<th>D</th>
-			<th>DMG</th>
-			<th>HR</th>
-		</tr>
-		{% for player in data[0] %}
-		<tr>
-			{% for stat in player %}
+<div class="content">
+	<div class="logtable">
+		<table class="blu">
+			<caption contenteditable="true" spellcheck="false">BLU</caption>
+			<tr>
+				<th></th>
+				<th>Name</th>
+				<th>K</th>
+				<th>D</th>
+				<th>DPM</th>
+				<th>HR</th>
+			</tr>
+			{% for player in data[0] %}
+			<tr>
+				{% for stat in player %}
+					{% if stat in ['scout', 'soldier', 'pyro', 'demoman', 'heavy', 'engineer', 'medic', 'sniper', 'spy'] %}
+						<td><img src="../static/img/{{ stat }}.png" alt="{{ stat }}"" width="32" height="32"></td>
+					{% else %}
+						<td>{{ stat }}</td>
+					{% endif %}
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+		
+		<table class="red">
+			<caption contenteditable="true" spellcheck="false">RED</caption>
+			<tr>
+				<th>K</th>
+				<th>D</th>
+				<th>DPM</th>
+				<th>HR</th>
+				<th>Name</th>
+				<th></th>
+			</tr>
+			{% for player in data[1] %}
+			<tr>
+				{% for stat in player %}
+					{% if stat in ['scout', 'soldier', 'pyro', 'demoman', 'heavy', 'engineer', 'medic', 'sniper', 'spy'] %}
+						<td><img src="../static/img/{{ stat }}.png" alt="{{ stat }}" width="32" height="32"></td>
+					{% else %}
+						<td>{{ stat }}</td>
+					{% endif %}
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+		<br>
+		<h2>Total</h2>
+		<table class="totalblu">
+			<tr>
+				<th>K</th>
+				<th>D</th>
+				<th>DMG</th>
+				<th>HR</th>
+			</tr>
+			<tr>
+			{% for stat in data[3] %}
 			<td>{{ stat }}</td>
 			{% endfor %}
-		</tr>
-		{% endfor %}
-	</table>
-	
-	<table class="red">
-		<caption contenteditable="true" spellcheck="false">RED</caption>
-		<tr>
-			<th>K</th>
-			<th>D</th>
-			<th>DMG</th>
-			<th>HR</th>
-			<th>Name</th>
-			<th>Class</th>
-		</tr>
-		{% for player in data[1] %}
-		<tr>
-			{% for stat in player %}
+			</tr>
+		</table>
+		<table class="totalred">
+			<tr>
+				<th>K</th>
+				<th>D</th>
+				<th>DMG</th>
+				<th>HR</th>
+			</tr>
+			<tr>
+			{% for stat in data[2] %}
 			<td>{{ stat }}</td>
 			{% endfor %}
-		</tr>
-		{% endfor %}
-	</table>
-	<br>
-	<h2>Total</h2>
-	<table class="totalblu">
-		<tr>
-			<th>K</th>
-			<th>D</th>
-			<th>DMG</th>
-			<th>HR</th>
-		</tr>
-		<tr>
-		{% for stat in data[3] %}
-		<td>{{ stat }}</td>
-		{% endfor %}
-		</tr>
-	</table>
-	<table class="totalred">
-		<tr>
-			<th>K</th>
-			<th>D</th>
-			<th>DMG</th>
-			<th>HR</th>
-		</tr>
-		<tr>
-		{% for stat in data[2] %}
-		<td>{{ stat }}</td>
-		{% endfor %}
-		</tr>
-	</table>
-</div>
+			</tr>
+		</table>
+	</div>
 
-<div class="shareablelink">
-	<input type="text" value="{{ sharelink }}" id="sharelink" readonly>
-	<div class="tooltip">
-		<button id="copylink" type="button" title="Copy Shareable Link" onclick="copy_function()" onmouseout="out_function()">
-			<span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-			Copy Shareable Link
-		</button>
+	<div class="shareablelink">
+		<input type="text" value="{{ sharelink }}" id="sharelink" readonly>
+		<div class="tooltip">
+			<button id="copylink" type="button" title="Copy Shareable Link" onclick="copy_function()" onmouseout="out_function()">
+				<span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+				Copy Shareable Link
+			</button>
+		</div>
 	</div>
 </div>
 {% endblock %}

@@ -64,7 +64,7 @@ def log():
         real_aliases = load_json()
         
         bigdict = response.json()
-        data = data_handler(real_aliases, bigdict)
+        data, map_played = data_handler(real_aliases, bigdict)
         
     elif request.method == "GET":
         log_url = request.args.get('l', None)
@@ -80,10 +80,10 @@ def log():
         real_aliases = load_json()
 
         bigdict = response.json()
-        data = data_handler(real_aliases, bigdict)
+        data, map_played = data_handler(real_aliases, bigdict)
 
     sharelink = f"{request.base_url}?l={log_url}"
-    return render_template('handle_logs.html', data=data, sharelink=sharelink)
+    return render_template('handle_logs.html', data=data, sharelink=sharelink, map_played=map_played)
 
 
 def data_handler(real_aliases, resp):
@@ -110,27 +110,34 @@ def data_handler(real_aliases, resp):
     total_blu = [0, 0, 0, 0]
     #row_format = " {:^6} {:^6} {:^6} {:^6} {:^6} {:^6} "
     data = [[],[],[],[]]
+    map_played = resp["info"]["map"]
     
     for j in red_team:
         i = j[0]
-        lst = [data1[i]["kills"], data1[i]["deaths"], data1[i]["dmg"], data1[i]["hr"], real_aliases[i], data1[i]["class_stats"][0]["type"]]
+        lst = [data1[i]["kills"], data1[i]["deaths"], data1[i]["dapm"], data1[i]["hr"], real_aliases[i], data1[i]["class_stats"][0]["type"]]
         #print(row_format.format(*lst))
         data[1] += [lst]
         for k in range(len(lst)-2):
-            total_blu[k] += lst[k]
+            if k != 2:
+                total_blu[k] += lst[k]
+            else:
+                total_blu[k] += data1[i]['dmg']
     
     for j in blu_team:
         i = j[0]
-        lst = [data1[i]["class_stats"][0]["type"], real_aliases[i], data1[i]["kills"], data1[i]["deaths"], data1[i]["dmg"], data1[i]["hr"]]
+        lst = [data1[i]["class_stats"][0]["type"], real_aliases[i], data1[i]["kills"], data1[i]["deaths"], data1[i]["dapm"], data1[i]["hr"]]
         #print(row_format.format(*lst))
         data[0] += [lst]
         for k in range(2, len(lst)):
-            total_red[k-2] += lst[k]
+            if k != 4:
+                total_red[k-2] += lst[k]
+            else:
+                total_red[k-2] += data1[i]['dmg']
 
     data[2] = total_blu
     data[3] = total_red
     
-    return data
+    return data, map_played
 
 
 def load_json():
