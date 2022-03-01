@@ -64,7 +64,7 @@ def log():
         real_aliases = load_json()
         
         bigdict = response.json()
-        data, map_played = data_handler(real_aliases, bigdict)
+        data, map_played, score = data_handler(real_aliases, bigdict)
         
     elif request.method == "GET":
         log_url = request.args.get('l', None)
@@ -74,16 +74,16 @@ def log():
         response = requests.get(api)
         while response.status_code == 429:
             time.sleep(10) # Wait before next call
-            print("STATUS: 429, Sent too many requests")
+            print("429 | Sent too many requests, waiting 10 seconds...")
             response = requests.get(api)
 
         real_aliases = load_json()
 
         bigdict = response.json()
-        data, map_played = data_handler(real_aliases, bigdict)
+        data, map_played, score = data_handler(real_aliases, bigdict)
 
     sharelink = f"{request.base_url}?l={log_url}"
-    return render_template('handle_logs.html', data=data, sharelink=sharelink, map_played=map_played)
+    return render_template('handle_logs.html', data=data, sharelink=sharelink, map_played=map_played, score=score)
 
 
 def data_handler(real_aliases, resp):
@@ -111,6 +111,7 @@ def data_handler(real_aliases, resp):
     #row_format = " {:^6} {:^6} {:^6} {:^6} {:^6} {:^6} "
     data = [[],[],[],[]]
     map_played = resp["info"]["map"]
+    score = [resp["teams"]["Blue"]["score"], resp["teams"]["Red"]["score"]]
     
     for j in red_team:
         i = j[0]
@@ -137,7 +138,7 @@ def data_handler(real_aliases, resp):
     data[2] = total_blu
     data[3] = total_red
     
-    return data, map_played
+    return data, map_played, score
 
 
 def load_json():
