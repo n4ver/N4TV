@@ -8,7 +8,7 @@ Install dependencies with `$ pip install -r requirements.txt`.
 
 
 ## Use
-Run app.py with `python app.py` and go to localhost.\
+Run \with `python wsgi.py` and go to localhost.\
 Index page will show form for inputting log URL. Use windows capture for resultant page, or use browser capture when using shareable link.
 
 ## TODO
