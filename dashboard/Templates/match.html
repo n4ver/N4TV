@@ -8,73 +8,166 @@
             <p style="color: var(--text-muted);">{{ map_name }}</p>
         </div>
         <div style="display: flex; gap: 2rem; font-family: var(--font-head); font-size: 2.5rem; align-items: center;">
-            <span class="team-blu">BLU: {{ blu_score }}</span>
+            <span class="team-blu">BLU: {{ score[0] }}</span>
             <span style="color: var(--text-muted);">-</span>
-            <span class="team-red">RED: {{ red_score }}</span>
+            <span class="team-red">RED: {{ score[1] }}</span>
         </div>
     </div>
 
-    <div class="glass-panel bg-blu" style="padding: 1rem;">
-        <h3>BLU Team - Score: {{ score[0] }}</h3>
-        <table class="stats-table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>K</th>
-                    <th>D</th>
-                    <th>DPM</th>
-                    <th>Heals</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for player in data[0] %}
-            <tr>
-                {% for stat in player %}
-                    {% if stat in ['scout', 'soldier', 'pyro', 'demoman', 'heavy', 'engineer', 'medic', 'sniper', 'spy'] %}
-                        <td><img src="../static/img/{{ stat }}.png" alt="{{ stat }}" width="32" height="32"></td>
-                    {% else %}
-                        <td>{{ stat }}</td>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-    <div class="glass-panel bg-red" style="padding: 1rem;">
-        <h3>RED Team - Score: {{ score[1] }}</h3>
-        <table class="stats-table">
-            <thead>
-                <tr>
-                    <th>K</th>
-                    <th>D</th>
-                    <th>DPM</th>
-                    <th>Heals</th>
-                    <th>Name</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for player in data[1] %}
-                <tr>
-                    {% for stat in player %}
-                        {% if stat in ['scout', 'soldier', 'pyro', 'demoman', 'heavy', 'engineer', 'medic', 'sniper', 'spy'] %}
-                            <td><img src="../static/img/{{ stat }}.png" alt="{{ stat }}" width="32" height="32"></td>
-                        {% else %}
-                            <td>{{ stat }}</td>
-                        {% endif %}
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-start;">
+        
+        <div style="flex: 1; min-width: 400px; display: flex; flex-direction: column; gap: 1rem;">
+            <div class="glass-panel bg-blu" style="padding: 1rem; margin: 0;">
+                <h3 class="team-blu">BLU Team</h3>
+                <table class="stats-table" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>K</th>
+                            <th>D</th>
+                            <th>DPM</th>
+                            <th>Heals</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for player in data[0] %}
+                    <tr>
+                        {% for stat in player %}
+                            {% if stat in ['scout', 'soldier', 'pyro', 'demoman', 'heavy', 'engineer', 'medic', 'sniper', 'spy'] %}
+                                <td><img src="../static/img/{{ stat }}.png" alt="{{ stat }}" width="32" height="32"></td>
+                            {% else %}
+                                <td>{{ stat }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
                     {% endfor %}
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="glass-panel bg-blu" style="padding: 1rem; margin: 0;">
+                <h4>BLU Total</h4>
+                <table class="stats-table" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>K</th>
+                            <th>D</th>
+                            <th>DMG</th>
+                            <th>Heals</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        {% for stat in data[3] %}
+                        <td><strong>{{ stat }}</strong></td>
+                        {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div style="flex: 1; min-width: 400px; display: flex; flex-direction: column; gap: 1rem;">
+            <div class="glass-panel bg-red" style="padding: 1rem; margin: 0;">
+                <h3 class="team-red" style="text-align: right;">RED Team</h3>
+                <table class="stats-table" style="width: 100%; text-align: right;">
+                    <thead>
+                        <tr>
+                            <th>K</th>
+                            <th>D</th>
+                            <th>DPM</th>
+                            <th>Heals</th>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for player in data[1] %}
+                        <tr>
+                            {% for stat in player %}
+                                {% if stat in ['scout', 'soldier', 'pyro', 'demoman', 'heavy', 'engineer', 'medic', 'sniper', 'spy'] %}
+                                    <td><img src="../static/img/{{ stat }}.png" alt="{{ stat }}" width="32" height="32"></td>
+                                {% else %}
+                                    <td>{{ stat }}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="glass-panel bg-red" style="padding: 1rem; margin: 0;">
+                <h4 style="text-align: right;">RED Total</h4>
+                <table class="stats-table" style="width: 100%; text-align: right;">
+                    <thead>
+                        <tr>
+                            <th>K</th>
+                            <th>D</th>
+                            <th>DMG</th>
+                            <th>Heals</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        {% for stat in data[2] %}
+                        <td><strong>{{ stat }}</strong></td>
+                        {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     
-    <div style="text-align: center; margin-top: 2rem;">
-        <a href="{{ url_for('index') }}" class="btn btn-primary">Load New Log</a>
-        <a href="{{ url_for('log', stream='true') }}" class="btn" style="background: transparent; border: 1px solid var(--text-muted); margin-left: 10px;">Test Stream Mode</a>
+    <div style="margin-top: 3rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+        
+        {% if sharelink %}
+        <div class="glass-panel" style="padding: 1rem; display: flex; gap: 10px; align-items: center; max-width: 600px;">
+            <span style="white-space: nowrap; color: var(--text-muted);">Share:</span>
+            <input type="text" value="{{ sharelink }}" id="sharelink" readonly 
+                   style="background: rgba(0,0,0,0.2); border: 1px solid var(--text-muted); color: var(--text-main); padding: 5px 10px; border-radius: 4px; width: 300px;">
+            
+            <div class="tooltip" style="position: relative; display: inline-block;">
+                <button id="copylink" type="button" class="btn" onclick="copy_function()" onmouseout="out_function()"
+                        style="padding: 5px 15px; font-size: 0.9rem;">
+                    <span class="tooltiptext" id="myTooltip" 
+                          style="visibility: hidden; width: 140px; background-color: #555; color: #fff; text-align: center; border-radius: 6px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -75px; opacity: 0; transition: opacity 0.3s;">
+                        Copy to clipboard
+                    </span>
+                    Copy Link
+                </button>
+            </div>
+        </div>
+        {% endif %}
+
+        <div>
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Load New Log</a>
+            <a href="{{ url_for('log', stream='true') }}" class="btn" style="background: transparent; border: 1px solid var(--text-muted); margin-left: 10px;">Test Stream Mode</a>
+        </div>
     </div>
 </div>
+
+<script>
+function copy_function() {
+  var copyText = document.getElementById("sharelink");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+  navigator.clipboard.writeText(copyText.value);
+  
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copied!";
+  tooltip.style.visibility = "visible";
+  tooltip.style.opacity = "1";
+}
+
+function out_function() {
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copy to clipboard";
+  tooltip.style.visibility = "hidden";
+  tooltip.style.opacity = "0";
+}
+</script>
+
 {% endblock %}
