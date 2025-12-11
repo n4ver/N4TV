@@ -1,0 +1,155 @@
+/* dashboard/static/style.css */
+:root {
+    --bg-color: #0f0f13;
+    --text-main: #ffffff;
+    --text-muted: #a0a0b0;
+    --accent-primary: #ff8c00; /* Generic Orange or customized */
+    --accent-glow: rgba(255, 140, 0, 0.4);
+    
+    /* TF2 Specific Colors */
+    --tf2-red: #bd3b3b;
+    --tf2-blu: #5b7a8c;
+    
+    --glass-bg: rgba(22, 22, 29, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-blur: 12px;
+    
+    --font-head: 'Oswald', sans-serif; /* Punchy headers */
+    --font-body: 'Inter', sans-serif; /* Clean readable text */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Layout & Glassmorphism --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+    flex: 1;
+}
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* --- Typography --- */
+h1, h2, h3 {
+    font-family: var(--font-head);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: 3rem; font-weight: 700; background: linear-gradient(45deg, #fff, var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+h2 { font-size: 2rem; color: var(--text-main); border-left: 4px solid var(--accent-primary); padding-left: 1rem; }
+
+/* --- Forms & Inputs --- */
+.input-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+input[type="text"], input[type="url"] {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-head);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background: var(--accent-primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px var(--accent-glow);
+}
+
+/* --- Tables (For Logs) --- */
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.stats-table th {
+    text-align: left;
+    padding: 1rem;
+    background: rgba(255,255,255,0.05);
+    color: var(--text-muted);
+    font-family: var(--font-head);
+    font-weight: 500;
+}
+
+.stats-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.stats-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+}
+
+/* --- TF2 Team Colors --- */
+.team-red { color: var(--tf2-red); }
+.team-blu { color: var(--tf2-blu); }
+.bg-red { background: rgba(189, 59, 59, 0.1); border-left: 4px solid var(--tf2-red); }
+.bg-blu { background: rgba(91, 122, 140, 0.1); border-left: 4px solid var(--tf2-blu); }
+
+/* --- STREAM MODE (Transparent Background) --- */
+body.stream-mode {
+    background: transparent;
+}
+
+body.stream-mode .glass-panel {
+    background: rgba(22, 22, 29, 0.85); /* Slightly more opaque for readability over game */
+    box-shadow: none;
+}

@@ -43,7 +43,7 @@ def log():
         data, map_played, score = data_handler(real_aliases, bigdict)
 
     sharelink = f"{request.base_url}?l={log_url}"
-    return render_template('handle_logs.html', data=data, sharelink=sharelink, map_played=map_played, score=score)
+    return render_template('match.html', data=data, sharelink=sharelink, map_played=map_played, score=score)
 
 
 def data_handler(real_aliases, resp):

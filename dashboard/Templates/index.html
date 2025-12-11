@@ -1,19 +1,23 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block head %}
-<script src="../static/js/validate_form.js"></script>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/bg.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
-{% endblock %}
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+    <div class="glass-panel" style="width: 100%; max-width: 600px; text-align: center;">
+        <div style="margin-bottom: 2rem;">
+            <h1>N4TV <span style="color: var(--accent-primary);">Live</span></h1>
+            <p style="color: var(--text-muted);">TF2 Log Visualization & Stream Overlay</p>
+        </div>
 
-{% block body %}
-<div class="wrapper">
-	<div class="content_index">
-		<form name="logGetter" action="{{ url_for('log') }}" onsubmit="return validateForm()" method="POST">
-			<label for="logsurl">Log URL:</label>
-			<input type="text" id="logsurl" name="logsurl">
-			<input type="submit" id="submit" name="submit">
-		</form>
-	</div>
+        <form name="logGetter" action="{{ url_for('log') }}" method="POST" onsubmit="return validateForm()">
+            <div class="input-group" style="flex-direction: column;">
+                <input type="url" name="logsurl" placeholder="Paste logs.tf URL here..." required autofocus autocomplete="off">
+                <button type="submit" class="btn btn-primary">Load Match Stats</button>
+            </div>
+        </form>
+        
+        <div style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted);">
+            <p>Tip: Add <code>?stream=true</code> to the URL in OBS for transparent backgrounds.</p>
+        </div>
+    </div>
 </div>
 {% endblock %}

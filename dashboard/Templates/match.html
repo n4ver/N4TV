@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="glass-panel">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap;">
+        <div>
+            <h1>Match Results</h1>
+            <p style="color: var(--text-muted);">{{ map_name }}</p>
+        </div>
+        <div style="display: flex; gap: 2rem; font-family: var(--font-head); font-size: 2.5rem; align-items: center;">
+            <span class="team-blu">BLU: {{ blu_score }}</span>
+            <span style="color: var(--text-muted);">-</span>
+            <span class="team-red">RED: {{ red_score }}</span>
+        </div>
+    </div>
+
+    <div class="glass-panel bg-blu" style="padding: 1rem;">
+        <h3>BLU Team - Score: {{ score[0] }}</h3>
+        <table class="stats-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>K</th>
+                    <th>D</th>
+                    <th>DPM</th>
+                    <th>Heals</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for player in data[0] %}
+            <tr>
+                {% for stat in player %}
+                    {% if stat in ['scout', 'soldier', 'pyro', 'demoman', 'heavy', 'engineer', 'medic', 'sniper', 'spy'] %}
+                        <td><img src="../static/img/{{ stat }}.png" alt="{{ stat }}" width="32" height="32"></td>
+                    {% else %}
+                        <td>{{ stat }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="glass-panel bg-red" style="padding: 1rem;">
+        <h3>RED Team - Score: {{ score[1] }}</h3>
+        <table class="stats-table">
+            <thead>
+                <tr>
+                    <th>K</th>
+                    <th>D</th>
+                    <th>DPM</th>
+                    <th>Heals</th>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for player in data[1] %}
+                <tr>
+                    {% for stat in player %}
+                        {% if stat in ['scout', 'soldier', 'pyro', 'demoman', 'heavy', 'engineer', 'medic', 'sniper', 'spy'] %}
+                            <td><img src="../static/img/{{ stat }}.png" alt="{{ stat }}" width="32" height="32"></td>
+                        {% else %}
+                            <td>{{ stat }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Load New Log</a>
+        <a href="{{ url_for('log', stream='true') }}" class="btn" style="background: transparent; border: 1px solid var(--text-muted); margin-left: 10px;">Test Stream Mode</a>
+    </div>
+</div>
+{% endblock %}
