@@ -1,5 +1,6 @@
 # N4TV Dashboard
 A dashboard that implements a stream layout for showcasing TF2 logs on stream
+Deployed at https://nfourtv.vercel.app/
 
 ## Installation
 Install Python 3.5+ on your system to use.\
