@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request
 from flask import current_app as app
 
 from .common import extract_log_no, special_sort
@@ -30,11 +30,15 @@ def log():
         log_url = request.args.get('l', None)
         log_no = extract_log_no(log_url)
 
+        if log_no == -1:
+            print("Invalid log given.")
+
         api = "https://logs.tf/api/v1/log/" + str(log_no)
         response = requests.get(api)
+        
         while response.status_code == 429:
-            time.sleep(10) # Wait before next call
-            print("429 | Sent too many requests, waiting 10 seconds...")
+            time.sleep(5) # Wait before next call
+            print("429 | Sent too many requests, waiting 5 seconds...")
             response = requests.get(api)
 
         real_aliases = load_json()
@@ -48,20 +52,20 @@ def log():
 
 def data_handler(real_aliases, resp):
     aliases = resp["names"]
-    data1 = resp["players"]
+    player_data = resp["players"] # player data
 
     classorder = ['scout','soldier','pyro','demoman','heavyweapons','engineer','medic','sniper','spy']
-    order = {key:i for i, key in enumerate(classorder)}
+    order = {key:i for i, key in enumerate(classorder)} # Provide sorting values based on in-game class order
 
     red_team = []
     blu_team = []
     for i in aliases:
         if i not in real_aliases:
             real_aliases[i] = aliases[i]
-        classinfo = data1[i]["class_stats"][0]["type"]
-        if data1[i]["team"] == "Blue":
+        classinfo = player_data[i]["class_stats"][0]["type"]
+        if player_data[i]["team"] == "Blue":
             blu_team += [[i, order[classinfo]]]
-        elif data1[i]["team"] == "Red":
+        elif player_data[i]["team"] == "Red":
             red_team += [[i, order[classinfo]]]
 
     red_team = special_sort(red_team)
@@ -75,25 +79,25 @@ def data_handler(real_aliases, resp):
     
     for j in red_team:
         i = j[0]
-        lst = [data1[i]["kills"], data1[i]["deaths"], data1[i]["dapm"], data1[i]["hr"], real_aliases[i], data1[i]["class_stats"][0]["type"]]
+        lst = [player_data[i]["kills"], player_data[i]["deaths"], player_data[i]["dapm"], player_data[i]["hr"], real_aliases[i], player_data[i]["class_stats"][0]["type"]]
         #print(row_format.format(*lst))
         data[1] += [lst]
         for k in range(len(lst)-2):
             if k != 2:
                 total_blu[k] += lst[k]
             else:
-                total_blu[k] += data1[i]['dmg']
+                total_blu[k] += player_data[i]['dmg']
     
     for j in blu_team:
         i = j[0]
-        lst = [data1[i]["class_stats"][0]["type"], real_aliases[i], data1[i]["kills"], data1[i]["deaths"], data1[i]["dapm"], data1[i]["hr"]]
+        lst = [player_data[i]["class_stats"][0]["type"], real_aliases[i], player_data[i]["kills"], player_data[i]["deaths"], player_data[i]["dapm"], player_data[i]["hr"]]
         #print(row_format.format(*lst))
         data[0] += [lst]
         for k in range(2, len(lst)):
             if k != 4:
                 total_red[k-2] += lst[k]
             else:
-                total_red[k-2] += data1[i]['dmg']
+                total_red[k-2] += player_data[i]['dmg']
 
     data[2] = total_blu
     data[3] = total_red
