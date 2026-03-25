@@ -16,8 +16,8 @@ def configure_logging() -> None:
         level=getattr(logging, log_level),
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         handlers=[
-            logging.StreamHandler(),  # Console output
-            logging.FileHandler('app.log')  # File output
+            logging.StreamHandler()  # Console output
+            # logging.FileHandler('app.log')  # File output
         ]
     )
     
