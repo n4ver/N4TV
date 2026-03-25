@@ -6,3 +6,4 @@ KEY.txt
 *.db
 STEAM_API.txt
 test.py
+*.log
