@@ -2,7 +2,7 @@
 
 A Flask-based web dashboard for displaying Team Fortress 2 (TF2) match statistics in a stream-friendly format. Perfect for streamers who want to showcase competitive match data during broadcasts.
 
-**Live Demo:** https://nfourtv.vercel.app/
+**Live Demo:** [https://nfourtv.vercel.app/](https://n4-tv.vercel.app/)
 
 ## Features
 
