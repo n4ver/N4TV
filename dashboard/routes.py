@@ -43,14 +43,14 @@ def log() -> str:
     log_no = extract_log_no(log_url)
     if log_no == -1:
         logger.warning(f"Invalid log URL provided: {log_url}")
-        return render_template('index.html', error="Invalid log URL"), 400
+        return render_template('index.html', error="Invalid log URL"), 400 # type: ignore
     
     # Fetch log data from API with retry logic
     try:
         log_data = _fetch_log_data(log_no)
     except requests.RequestException as e:
         logger.error(f"Failed to fetch log data: {e}")
-        return render_template('index.html', error="Failed to fetch log data"), 500
+        return render_template('index.html', error="Failed to fetch log data"), 500 # type: ignore
     
     # Load player aliases and process data
     player_aliases = load_json(ALIASES_FILE)
