@@ -20,7 +20,7 @@ A Flask-based web dashboard for displaying Team Fortress 2 (TF2) match statistic
 
 1. **Clone or download this repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/n4ver/N4TV
    cd N4TV
    ```
 
