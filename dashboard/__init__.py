@@ -14,7 +14,15 @@ def create_app() -> Flask:
     # Initialize logging
     configure_logging()
     
-    app = Flask(__name__, instance_relative_config=False)
+    # Get the absolute path to the dashboard directory
+    dashboard_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    app = Flask(
+        __name__,
+        instance_relative_config=False,
+        template_folder=os.path.join(dashboard_dir, 'Templates'),
+        static_folder=os.path.join(dashboard_dir, 'static')
+    )
 
     # Use environment variable for debug mode, default to False in production
     app.debug = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
