@@ -126,7 +126,7 @@
         {% if sharelink %}
         <div class="glass-panel" style="padding: 1rem; display: flex; gap: 10px; align-items: center; max-width: 600px;">
             <span style="white-space: nowrap; color: var(--text-muted);">Share:</span>
-            <input type="text" value="{{ sharelink }}" id="sharelink" readonly 
+            <input type="text" value="{{ sharelink.split('#')[0] }}" id="sharelink" readonly 
                    style="background: rgba(0,0,0,0.2); border: 1px solid var(--text-muted); color: var(--text-main); padding: 5px 10px; border-radius: 4px; width: 300px;">
             
             <div class="tooltip" style="position: relative; display: inline-block;">
@@ -143,8 +143,8 @@
         {% endif %}
 
         <div>
-            <a href="{{ url_for('index') }}" class="btn btn-primary">Load New Log</a>
-            <a href="{{ sharelink + "&stream=true" }}" class="btn" style="background: transparent; border: 1px solid var(--text-muted); margin-left: 10px;">Test Stream Mode</a>
+            <a href="{{ url_for('index')}}" class="btn btn-primary">Load New Log</a>
+            <a href="{{ sharelink.split('#')[0] + "&stream=true" }}" class="btn" style="background: transparent; border: 1px solid var(--text-muted); margin-left: 10px;">Test Stream Mode</a>
         </div>
     </div>
 </div>
